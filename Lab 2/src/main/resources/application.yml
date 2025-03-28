@@ -1,0 +1,17 @@
+custom:
+    login-url: test-login
+    user: test-user
+    password: pass
+spring:
+    application:
+        name: piotry
+    main:
+        banner-mode: 'off'
+logging:
+    level:
+        root: 'off'
+my:
+    custom:
+        value: 'false'
+app:
+    environment: 'qa'
