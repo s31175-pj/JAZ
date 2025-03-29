@@ -1,5 +1,6 @@
 package pl.pjatk.piotry.Services;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,27 +18,45 @@ class FacadeServiceTest {
 
 
     @Mock
-    ProdService prodService;
+    HandlerServiceInterface prodService;
 
     @Mock
-    QaService qaService;
+    HandlerServiceInterface qaService;
 
     @Mock
-    DevService devService;
+    HandlerServiceInterface devService;
 
     @Mock
-    HandlerServiceInterface handlerService;
+    HandlerServiceInterface stagingService;
 
-    @InjectMocks
-    FacadeService facadeService;
+    private FacadeService facadeService;
+
+    @BeforeEach
+    public void setUp() {
+        facadeService = new FacadeService(devService, qaService, prodService, stagingService);
+    }
 
     @Test
-    void execute() {
-        when(facadeService.execute(any())).thenReturn("Hello from "+any());
+    public void testExecuteDevEnvironment() {
+        when(devService.handleRequest()).thenReturn("Hello from Dev");
+        assertEquals("Hello from Dev", facadeService.execute("dev"));
+    }
 
-        facadeService.execute("dev");
-        facadeService.execute("prod");
-        facadeService.execute("qa");
+    @Test
+    public void testExecuteQaEnvironment() {
+        when(qaService.handleRequest()).thenReturn("Hello from QA");
+        assertEquals("Hello from QA", facadeService.execute("qa"));
+    }
 
+    @Test
+    public void testExecuteProdEnvironment() {
+        when(prodService.handleRequest()).thenReturn("Hello from Prod");
+        assertEquals("Hello from Prod", facadeService.execute("prod"));
+    }
+
+    @Test
+    public void testExecuteStagingEnvironment() {
+        when(stagingService.handleRequest()).thenReturn("Hello from Staging");
+        assertEquals("Hello from Staging", facadeService.execute("staging"));
     }
 }

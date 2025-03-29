@@ -14,23 +14,28 @@ public class FacadeService {
     ProdService prodService;
     QaService qaService;
     DevService devService;
+    StagingService stagingService;
 
     private final Map<String, HandlerServiceInterface> handlers = new HashMap<>();
 
     @Autowired
     public FacadeService(@Qualifier("devService") HandlerServiceInterface devService,
                          @Qualifier("qaService") HandlerServiceInterface qaService,
-                         @Qualifier("prodService") HandlerServiceInterface prodService) {
+                         @Qualifier("prodService") HandlerServiceInterface prodService,
+                         @Qualifier("stagingService") HandlerServiceInterface stagingService) {
         handlers.put("dev", devService);
         handlers.put("qa", qaService);
         handlers.put("prod", prodService);
+        handlers.put("staging", stagingService);
+
     }
 
-    public FacadeService(ProdService prodService, QaService qaService, DevService devService)
+    public FacadeService(ProdService prodService, QaService qaService, DevService devService, StagingService stagingService)
     {
         this.prodService = prodService;
         this.qaService = qaService;
         this.devService = devService;
+        this.stagingService = stagingService;
     }
 
     public String execute(String environment)
