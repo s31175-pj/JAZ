@@ -1,29 +1,31 @@
-package pl.pjatk.lab3;
+package pl.pjatk.lab3.controllers;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.pjatk.lab3.pojos.Car;
 
 @RestController
 @RequestMapping("homework")
 public class HomeworkController {
 
 
-    @GetMapping("{someValue}")
+    @GetMapping("get/{someValue}")
     public ResponseEntity<String> path(@PathVariable String someValue)
     {
         return ResponseEntity.ok(someValue);
     }
 
-    @GetMapping("{someValue}")
+    @GetMapping("get")
     public ResponseEntity<String> request(@RequestParam String someValue)
     {
         return ResponseEntity.ok(someValue);
     }
 
     @PutMapping("put/{someValue}")
-    public ResponseEntity<Car> newPut(@PathVariable String model, @RequestParam Car updatedCar)
+    public ResponseEntity<Car> newPut(@PathVariable String someValue, @RequestBody Car updatedCar)
     {
-        updatedCar.setModel(model);
+        updatedCar.setModel(someValue);
         return ResponseEntity.ok(updatedCar);
     }
 
@@ -33,10 +35,10 @@ public class HomeworkController {
         return ResponseEntity.ok(updatedCar);
     }
 
-    @PostMapping("delete/{someValue}")
-    public ResponseEntity<Car> newDelete(@PathVariable String model)
+    @DeleteMapping("delete/{someValue}")
+    public ResponseEntity<Void> newDelete(@PathVariable String model)
     {
-        
-        return ResponseEntity.ok(car);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

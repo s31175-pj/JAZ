@@ -1,4 +1,4 @@
-package pl.pjatk.lab3;
+package pl.pjatk.lab3.pojos;
 
 public class Car {
     private String brand;

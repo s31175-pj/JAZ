@@ -1,20 +1,21 @@
-package pl.pjatk.lab3;
+package pl.pjatk.lab3.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.pjatk.lab3.pojos.Car;
 
 @RestController
 @RequestMapping("test")
 public class WebController {
 
-    @GetMapping("hello")
-    public ResponseEntity<String> hello()
-    {
-
-        return ResponseEntity.ok("Hello World");
-
-    }
+//    @GetMapping("hello")
+//    public ResponseEntity<String> hello()
+//    {
+//
+//        return ResponseEntity.ok("Hello World");
+//
+//    }
 
 //    @GetMapping("hello/{someValue}")
 //    public ResponseEntity<String> diffValue(@PathVariable String someValue)
@@ -24,21 +25,21 @@ public class WebController {
 //
 //    }
 
-    @GetMapping("hello/{someValue}")
-    public ResponseEntity<String> diffValue(@RequestParam("someValue") String someValue)
-    {
+    @GetMapping("/hello")
+    public ResponseEntity<String> helloWithParam(@RequestParam(value = "reqParam") String reqParamValue) {
+        // Możesz tutaj wykonać jakąś logikę na podstawie wartości reqParamValue
 
-        return ResponseEntity.ok(someValue);
-
+        // Tworzymy ResponseEntity z przekazaną wartością i statusem HTTP 200 OK
+        return new ResponseEntity<>(reqParamValue, HttpStatus.OK);
     }
 
 //    @GetMapping("model")
 //    public ResponseEntity<Car> model()
 //    {
 //        Car car = new Car();
-//        car.setBrand("Toyota");
-//        car.setModel("Corolla");
-//        car.setYear(2020);
+////        car.setBrand("Toyota");
+////        car.setModel("Corolla");
+////        car.setYear(2020);
 //        return ResponseEntity.ok(car);
 //    }
 
@@ -51,4 +52,6 @@ public class WebController {
 //        car.setYear(2020);
         return ResponseEntity.ok(car);
     }
+
+
 }
