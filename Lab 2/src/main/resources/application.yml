@@ -1,7 +1,8 @@
 custom:
     login-url: test-login
-    user: test-user
-    password: pass
+    credencials:
+        user: test-user
+        password: pass
 spring:
     application:
         name: piotry
@@ -13,5 +14,6 @@ logging:
 my:
     custom:
         value: 'false'
+        property: 'costam'
 app:
     environment: 'qa'

@@ -1,19 +1,27 @@
 package pl.pjatk.Lab4;
 
 public class Movie {
-    private final Long id;
+    private static Long id = 0L;
+    private final Long idL;
     private String title;
     private String category;
     private Long duration;
 
-    public Movie(Long id, String title, String category) {
-        this.id = id;
+    public Movie(String title, String category, Long duration)
+    {
+        this.idL = id++;
         this.title = title;
         this.category = category;
+        this.duration = duration;
+    }
+
+    public Movie()
+    {
+        this.idL = id++;
     }
 
     public Long getId() {
-        return id;
+        return idL;
     }
 
     public String getTitle() {

@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class NewComponent {
-    @Autowired private ApplicationContext applicationContext;
+    @Autowired
+    private ApplicationContext applicationContext;
 
     public NewComponent(ApplicationContext applicationContext) {
         TestComponent testComponent = applicationContext.getBean(TestComponent.class);

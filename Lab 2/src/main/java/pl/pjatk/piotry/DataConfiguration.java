@@ -32,7 +32,7 @@ public class DataConfiguration {
     @Bean
     public ZwyklePojo pojo()
     {
-        System.out.println(property);
+        System.out.println(loginUrl);
         return new ZwyklePojo();
     }
 
