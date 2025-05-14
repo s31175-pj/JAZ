@@ -2,9 +2,9 @@ spring:
     application:
         name: MovieService
     datasource:
-        url: jdbc:mysql://szuflandia.pjwstk.edu.pl:3306/s31175
-        username: s31175
-        password: Pio.Tryb
+        url: jdbc:mysql://127.0.0.1:3306/MovieService
+        username: root
+        password:
     jpa:
         hibernate:
             ddl-auto: update

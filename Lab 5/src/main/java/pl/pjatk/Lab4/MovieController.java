@@ -66,4 +66,18 @@ public class MovieController {
         movieService.deleteMovie(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("available/{id}")
+    public ResponseEntity<Movie> updateMovieAvailable(@PathVariable Long id)
+    {
+        if (movieService.getMovieById(id) == null) return ResponseEntity.notFound().build();
+        try
+        {
+            return ResponseEntity.ok(movieService.updateMovieAvailable(id));
+        } catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
 }

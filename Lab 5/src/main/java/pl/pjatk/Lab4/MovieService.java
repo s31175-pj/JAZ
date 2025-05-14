@@ -8,47 +8,51 @@ import java.util.List;
 @Service
 public class MovieService {
 
-    List<Movie> movies = new ArrayList<>();
+    private final MovieRepository movieRepository;
 
-    public MovieService() {
-        movies.add(new Movie("Shrek", "Animation", 89L));
-        movies.add(new Movie("Shrek 2", "Animation", 93L));
-        movies.add(new Movie("Shrek Trzeci", "Animation", 93L));
-
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
     public List<Movie> getAll() {
-        return movies;
+        return movieRepository.findAll();
     }
 
     public Movie getMovieById(Long id)
     {
-        for (Movie movie : movies) {
-            if (movie.getId().equals(id)) return movie;
-        }
-        return null;
+        if(movieRepository.findById(id).isPresent()) return movieRepository.findById(id).get();
+        else return null;
     }
 
     public void add(Movie movie)
     {
-        movies.add(movie);
+        movieRepository.save(movie);
     }
 
     public Movie updateMovie(Long id, Movie updatedMovie)
     {
-        for (Movie movie : movies) {
-            if (movie.getId().equals(id))
-            {
-                movie.setTitle(updatedMovie.getTitle());
-                movie.setCategory(updatedMovie.getCategory());
-                movie.setDuration(updatedMovie.getDuration());
-                return movie;
-            }
+        if(movieRepository.findById(id).isPresent())
+        {
+            Movie movie = movieRepository.findById(id).get();
+            movie.setTitle(updatedMovie.getTitle());
+            movie.setCategory(updatedMovie.getCategory());
+            movie.setDuration(updatedMovie.getDuration());
+            movieRepository.save(movie);
+            return movie;
         }
         return null;
     }
 
-    public void deleteMovie(Long id)
+    public void deleteMovie(Long id) { movieRepository.deleteById(id); }
+
+    public Movie updateMovieAvailable(Long id)
     {
-        movies.remove(getMovieById(id));
+        if(movieRepository.findById(id).isPresent())
+        {
+            Movie movie = movieRepository.findById(id).get();
+            movie.setAvailable();
+            movieRepository.save(movie);
+            return movie;
+        }
+        return null;
     }
 }

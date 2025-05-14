@@ -13,6 +13,7 @@ public class Movie {
     private String title;
     private String category;
     private Long duration;
+    private  boolean isAvailable=false;
 
     public Movie(String title, String category, Long duration)
     {
@@ -21,9 +22,7 @@ public class Movie {
         this.duration = duration;
     }
 
-    public Movie()
-    {
-    }
+    public Movie() {}
 
     public Long getId() {
         return idL;
@@ -52,4 +51,8 @@ public class Movie {
     public void setDuration(Long duration) {
         this.duration = duration;
     }
+
+    public boolean isAvailable() { return isAvailable; }
+
+    public void setAvailable() { isAvailable = !isAvailable(); }
 }
