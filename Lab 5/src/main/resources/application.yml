@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: MovieService
+    datasource:
+        url: jdbc:mysql://szuflandia.pjwstk.edu.pl:3306/s31175
+        username: s31175
+        password: Pio.Tryb
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
