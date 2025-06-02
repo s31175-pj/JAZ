@@ -1,10 +1,10 @@
 spring:
     application:
-        name: MovieService
+        name: MovieDB
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/MovieService
+        url: jdbc:mysql://127.0.0.1:3306/MovieDB
         username: root
-        password:
+        password: -Piferman4
     jpa:
         hibernate:
             ddl-auto: update
