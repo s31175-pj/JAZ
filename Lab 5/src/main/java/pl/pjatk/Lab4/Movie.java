@@ -54,5 +54,7 @@ public class Movie {
 
     public boolean isAvailable() { return isAvailable; }
 
-    public void setAvailable() { isAvailable = !isAvailable(); }
+    public void setAvailable() { this.isAvailable = true; }
+
+    public void setUnavailable() { this.isAvailable = false; }
 }

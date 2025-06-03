@@ -19,4 +19,16 @@ public class RestApiController {
     public ResponseEntity<Movie> getMovie(@PathVariable Long id) {
         return ResponseEntity.ok(rentalService.getMovie(id));
     }
+
+    @GetMapping("available/{id}")
+    public ResponseEntity<Movie> updateMovieAvailable(@PathVariable Long id)
+    {
+        return ResponseEntity.ok(rentalService.returnMovie(id));
+    }
+
+    @GetMapping("unavailable/{id}")
+    public ResponseEntity<Movie> updateMovieUnavailable(@PathVariable Long id)
+    {
+        return ResponseEntity.ok(rentalService.rentMovie(id));
+    }
 }

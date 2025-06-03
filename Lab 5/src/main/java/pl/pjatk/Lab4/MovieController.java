@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -73,7 +72,21 @@ public class MovieController {
         if (movieService.getMovieById(id) == null) return ResponseEntity.notFound().build();
         try
         {
-            return ResponseEntity.ok(movieService.updateMovieAvailable(id));
+            return ResponseEntity.ok(movieService.returnMovie(id));
+        } catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+    @GetMapping("unavailable/{id}")
+    public ResponseEntity<Movie> updateMovieUnvailable(@PathVariable Long id)
+    {
+        if (movieService.getMovieById(id) == null) return ResponseEntity.notFound().build();
+        try
+        {
+            return ResponseEntity.ok(movieService.rentMovie(id));
         } catch (Exception e)
         {
             System.out.println(e.getMessage());

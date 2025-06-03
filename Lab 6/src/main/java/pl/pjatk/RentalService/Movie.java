@@ -6,7 +6,7 @@ public class Movie {
     private String title;
     private String category;
     private Long duration;
-    private  boolean isAvailable=false;
+    private boolean isAvailable=false;
 
     public Movie(String title, String category, Long duration)
     {
