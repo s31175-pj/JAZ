@@ -1,11 +1,29 @@
 spring:
     application:
-        name: MovieService
+        name: MovieDB
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/MovieService
+        url: jdbc:mysql://127.0.0.1:3306/MovieDB
         username: root
-        password:
+        password: -Piferman4
     jpa:
         hibernate:
             ddl-auto: update
         show-sql: true
+
+springdoc:
+    swagger-ui:
+        path: /swagger-ui.html
+        disable-swagger-default-url: true
+        urls-primary-name: Rental Service API
+    info:
+        description: API for movies managing service.
+        title: Movie Service API Documentation
+        terms-of-service: http://swagger.io/terms/
+        license:
+            url: http://www.apache.org/licenses/LICENSE-2.0.html
+            name: Apache 2.0
+        version: 1.0.0
+        contact:
+            email: contact@your-company.com
+            name: Your Name/Team Name
+            url: http://your-company-website.com

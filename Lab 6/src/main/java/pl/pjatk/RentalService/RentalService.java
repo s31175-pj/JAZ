@@ -23,6 +23,64 @@ public class RentalService {
     public Movie getMovie(Long id) {
         String url = "http://localhost:8080/movies/"+id;
 
+        return getMovie(id, url);
+    }
+
+    public Movie returnMovie(Long id) {
+        String url = "http://localhost:8080/movies/available/" + id;
+
+        return getMovie(id, url);
+
+//        try {
+//            return restTemplate.getForObject(url, Movie.class);
+//        } catch (HttpClientErrorException e) {
+//            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+//                throw new MovieNotFoundException("Movie with ID " + id + " not found (return operation).");
+//            } else if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
+//                throw new InvalidMovieRequestException("Invalid request for movie ID " + id + " (return operation): " + e.getResponseBodyAsString());
+//            } else {
+//                throw new InvalidMovieRequestException("Client error from MovieService (" + e.getStatusCode() + ") for ID " + id + " (return operation): " + e.getResponseBodyAsString());
+//            }
+//        } catch (HttpServerErrorException e) {
+//            throw new MovieServiceUnavailableException("MovieService returned a server error (" + e.getStatusCode() + ") (return operation): " + e.getResponseBodyAsString(), e);
+//        } catch (ResourceAccessException e) {
+//            if (e.getCause() instanceof java.net.ConnectException) {
+//                throw new MovieServiceConnectionFailedException("Could not connect to MovieService (return operation) at " + url + ": " + e.getMessage(), e);
+//            }
+//            throw new MovieServiceConnectionFailedException("Resource access error during call to MovieService (return operation): " + e.getMessage(), e);
+//        } catch (Exception e) {
+//            throw new RuntimeException("An unexpected error occurred during movie return operation: " + e.getMessage(), e);
+//        }
+    }
+
+    public Movie rentMovie(Long id) {
+        String url = "http://localhost:8080/movies/unavailable/" + id;
+
+        return getMovie(id, url);
+
+//        try {
+//            return restTemplate.getForObject(url, Movie.class);
+//        } catch (HttpClientErrorException e) {
+//            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+//                throw new MovieNotFoundException("Movie with ID " + id + " not found (return operation).");
+//            } else if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
+//                throw new InvalidMovieRequestException("Invalid request for movie ID " + id + " (return operation): " + e.getResponseBodyAsString());
+//            } else {
+//                throw new InvalidMovieRequestException("Client error from MovieService (" + e.getStatusCode() + ") for ID " + id + " (return operation): " + e.getResponseBodyAsString());
+//            }
+//        } catch (HttpServerErrorException e) {
+//            throw new MovieServiceUnavailableException("MovieService returned a server error (" + e.getStatusCode() + ") (return operation): " + e.getResponseBodyAsString(), e);
+//        } catch (ResourceAccessException e) {
+//            if (e.getCause() instanceof java.net.ConnectException) {
+//                throw new MovieServiceConnectionFailedException("Could not connect to MovieService (return operation) at " + url + ": " + e.getMessage(), e);
+//            }
+//            throw new MovieServiceConnectionFailedException("Resource access error during call to MovieService (return operation): " + e.getMessage(), e);
+//        } catch (Exception e) {
+//            throw new RuntimeException("An unexpected error occurred during movie return operation: " + e.getMessage(), e);
+//        }
+    }
+
+    private Movie getMovie(Long id, String url) {
         try
         {
             return restTemplate.getForObject(url, Movie.class);
@@ -48,55 +106,6 @@ public class RentalService {
         catch (Exception e)
         {
             throw new RuntimeException("An unexpected error occurred while communicating with MovieService: " + e.getMessage(), e);
-        }
-//        return restTemplate.getForObject("http://localhost:8080/movies/"+id, Movie.class);
-    }
-
-    public Movie returnMovie(Long id) {
-        String url = "http://localhost:8080/movies/available/" + id;
-        try {
-            return restTemplate.getForObject(url, Movie.class);
-        } catch (HttpClientErrorException e) {
-            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
-                throw new MovieNotFoundException("Movie with ID " + id + " not found (return operation).");
-            } else if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
-                throw new InvalidMovieRequestException("Invalid request for movie ID " + id + " (return operation): " + e.getResponseBodyAsString());
-            } else {
-                throw new InvalidMovieRequestException("Client error from MovieService (" + e.getStatusCode() + ") for ID " + id + " (return operation): " + e.getResponseBodyAsString());
-            }
-        } catch (HttpServerErrorException e) {
-            throw new MovieServiceUnavailableException("MovieService returned a server error (" + e.getStatusCode() + ") (return operation): " + e.getResponseBodyAsString(), e);
-        } catch (ResourceAccessException e) {
-            if (e.getCause() instanceof java.net.ConnectException) {
-                throw new MovieServiceConnectionFailedException("Could not connect to MovieService (return operation) at " + url + ": " + e.getMessage(), e);
-            }
-            throw new MovieServiceConnectionFailedException("Resource access error during call to MovieService (return operation): " + e.getMessage(), e);
-        } catch (Exception e) {
-            throw new RuntimeException("An unexpected error occurred during movie return operation: " + e.getMessage(), e);
-        }
-    }
-
-    public Movie rentMovie(Long id) {
-        String url = "http://localhost:8080/movies/unavailable/" + id;
-        try {
-            return restTemplate.getForObject(url, Movie.class);
-        } catch (HttpClientErrorException e) {
-            if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
-                throw new MovieNotFoundException("Movie with ID " + id + " not found (return operation).");
-            } else if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
-                throw new InvalidMovieRequestException("Invalid request for movie ID " + id + " (return operation): " + e.getResponseBodyAsString());
-            } else {
-                throw new InvalidMovieRequestException("Client error from MovieService (" + e.getStatusCode() + ") for ID " + id + " (return operation): " + e.getResponseBodyAsString());
-            }
-        } catch (HttpServerErrorException e) {
-            throw new MovieServiceUnavailableException("MovieService returned a server error (" + e.getStatusCode() + ") (return operation): " + e.getResponseBodyAsString(), e);
-        } catch (ResourceAccessException e) {
-            if (e.getCause() instanceof java.net.ConnectException) {
-                throw new MovieServiceConnectionFailedException("Could not connect to MovieService (return operation) at " + url + ": " + e.getMessage(), e);
-            }
-            throw new MovieServiceConnectionFailedException("Resource access error during call to MovieService (return operation): " + e.getMessage(), e);
-        } catch (Exception e) {
-            throw new RuntimeException("An unexpected error occurred during movie return operation: " + e.getMessage(), e);
         }
     }
 
